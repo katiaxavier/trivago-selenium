@@ -17,7 +17,7 @@ public class Teste {
 
 	@BeforeEach
 	public static void setUp() {
-		driver = Web.createChrome();
+		driver = Web.createChrome("http://192.168.151.93:8080");
 
 	}
 

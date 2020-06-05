@@ -17,7 +17,7 @@ public class MainTest {
 	@BeforeEach
 	public void setUp() {
 		driver = new ChromeDriver();
-		driver.get("https://www.trivago.com.br");
+		driver.get("http://192.168.151.93:8080");
 	}
 
 	@AfterEach
@@ -48,5 +48,14 @@ public class MainTest {
 		WebElement verificar = driver.findElement(By.xpath("//span[contains(text(),'Hotel Do Largo')]"));
 		assertTrue(verificar.isDisplayed());
 	}
+	
+	
+	@Test
+	public void should_login() {
+		driver.findElement(By.name("usuario")).sendKeys("v320");
+		driver.findElement(By.name("password")).sendKeys("v320");
+		driver.findElement(By.className("v-btn__content")).click();
+	}
+
 }
 
