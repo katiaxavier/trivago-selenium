@@ -21,31 +21,21 @@ public class ProdutoTest {
 		driver = new ChromeDriver();
 		wait = new WebDriverWait(driver, 10);
 		driver.get("http://192.168.151.17");
+
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userLogin"))).sendKeys("v456");
+		driver.findElement(By.id("next")).click();
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("v456");
+		driver.findElement(By.id("next")).click();
 	}
 
 	@AfterEach
 	public void tearDown() {
-		driver.quit();
-	}
-
-	@Test
-	public void deve_fazer_login() {
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userLogin"))).sendKeys("v456");
-		driver.findElement(By.id("next")).click();
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("v456");
-		driver.findElement(By.id("next")).click();
+//		driver.quit();
 	}
 
 	@Test
 	public void deve_adicionar_produto() {
-		// inserir codigo de usuario
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userLogin"))).sendKeys("v456");
-		// clicar no botão para prosseguir
-		driver.findElement(By.id("next")).click();
-		// inserir senha
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("v456");
-		// clicar no botão para prosseguir
-		driver.findElement(By.id("next")).click();
+
 		// Informar o objeto de busca
 		driver.findElement(By.id("search-top-search")).sendKeys("hg33036");
 		// Clicar no botão de buscar
@@ -61,4 +51,34 @@ public class ProdutoTest {
 				() -> assertEquals("1", driver.findElement(By.className("count_itens-cart")).getText()));
 
 	}
+
+	@Test
+	public void deve_remover_produto() {
+		// Informar o objeto de busca
+		driver.findElement(By.id("search-top-search")).sendKeys("hg33036");
+		// Clicar no botão de buscar
+		driver.findElement(By.id("search-top-search-button")).click();
+		// Esperar que o primeiro elemento de adicionar no carrinho esteja visivel e
+		// clicar
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//i[@class=\"material-icons pointer\"]")))
+				.click();
+
+		try {
+			Thread.sleep(1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		wait.until(ExpectedConditions
+				.visibilityOfElementLocated(By.xpath("//i[contains(text(),'remove_circle_outline')]"))).click();
+
+		// Validar se mensagem de sucesso foi exibida e se há 0 item no carrinho
+		assertAll(
+				() -> assertEquals("Item Removido com sucesso",
+						wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("message"))).getText()),
+				() -> assertEquals("0", driver.findElement(By.className("count_itens-cart")).getText()));
+
+	}
+
 }
