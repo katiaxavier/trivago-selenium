@@ -30,7 +30,7 @@ public class LoginTest {
 	}
 
 	@Test
-	public void deve_fazer_login() {
+	public void should_login() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userLogin"))).sendKeys("v456");
 		driver.findElement(By.id("next")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("v456");
@@ -40,7 +40,7 @@ public class LoginTest {
 	}
 
 	@Test
-	public void nao_deve_fazer_login() {
+	public void should_dont_do_login_invalid_password() {
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userLogin"))).sendKeys("v456");
 		driver.findElement(By.id("next")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("111");

@@ -36,7 +36,7 @@ public class ProdutoTest {
 	}
 
 	@Test
-	public void deve_adicionar_produto() {
+	public void should_add_product() {
 
 		// Informar o objeto de busca
 		driver.findElement(By.id("search-top-search")).sendKeys("hg33036");
@@ -55,7 +55,7 @@ public class ProdutoTest {
 	}
 
 	@Test
-	public void deve_remover_produto() {
+	public void should_remove_product() {
 		// Informar o objeto de busca
 		driver.findElement(By.id("search-top-search")).sendKeys("hg33036");
 		// Clicar no botão de buscar
