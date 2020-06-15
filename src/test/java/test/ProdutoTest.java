@@ -19,6 +19,7 @@ public class ProdutoTest {
 	@BeforeEach
 	public void setUp() {
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver, 10);
 		driver.get("http://192.168.151.17");
 
@@ -26,11 +27,12 @@ public class ProdutoTest {
 		driver.findElement(By.id("next")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("v456");
 		driver.findElement(By.id("next")).click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("appLogin")));
 	}
 
 	@AfterEach
 	public void tearDown() {
-//		driver.quit();
+		driver.quit();
 	}
 
 	@Test

@@ -7,12 +7,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import support.Web;
 
 public class LoginTest {
 
@@ -22,13 +19,14 @@ public class LoginTest {
 	@BeforeEach
 	public void setUp() {
 		driver = new ChromeDriver();
+		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver, 10);
 		driver.get("http://192.168.151.17");
 	}
 
 	@AfterEach
 	public void tearDown() {
-//		driver.quit();
+		driver.quit();
 	}
 
 	@Test

@@ -19,18 +19,21 @@ public class Cart {
 	@BeforeEach
 	public void setUp() {
 		driver = new ChromeDriver();
+
+		driver.manage().window().maximize();
 		wait = new WebDriverWait(driver, 10);
 		driver.get("http://192.168.151.17");
-		
+
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("userLogin"))).sendKeys("v456");
 		driver.findElement(By.id("next")).click();
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("passwordLogin"))).sendKeys("v456");
 		driver.findElement(By.id("next")).click();
+		wait.until(ExpectedConditions.invisibilityOfElementLocated(By.id("appLogin")));
 	}
 
 	@AfterEach
 	public void tearDown() {
-//		driver.quit();
+		driver.quit();
 	}
 
 	@Test
